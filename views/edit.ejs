@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Your Chat</title>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="/styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-center">Edit Your Chat</h1>
+      <p>Chat ID: <strong><%= searchChatById._id %></strong></p>
+      <p>
+        This chat was sent from <b><%= searchChatById.from %></b> to
+        <b><%= searchChatById.to %></b>
+      </p>
+      <form action="/chats/<%= searchChatById._id %>?_method=PUT" method="post">
+        <div class="form-group">
+          <label for="msg">Message</label>
+          <textarea class="form-control" id="msg" name="msg" rows="3" required>
+<%= searchChatById.msg %></textarea
+          >
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>

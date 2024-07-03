@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini WhatsApp</title>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="/styles.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="/popup.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-center">All Chats</h1>
+      <div class="newChat text-center">
+        <a class="btn btn-success" href="/chats/new">Create Chat</a>
+      </div>
+      <% chats.forEach(function(chat) { %>
+      <div class="card mb-3 chat-card">
+        <div class="card-body">
+          <h5 class="card-title"><strong>From:</strong> <%= chat.from %></h5>
+          <p class="card-text message"><%= chat.msg %></p>
+          <p class="card-text"><strong>Received by:</strong> <%= chat.to %></p>
+          <p class="card-text timestamp">
+            <strong>Received at:</strong> <%=
+            chat.created_at.toLocaleTimeString([], { hour: '2-digit', minute:
+            '2-digit', hour12: true }) %>
+          </p>
+          <p class="card-text timestamp">
+            <strong>Date:</strong> <%= chat.created_at.toDateString() %>
+          </p>
+
+          <% // Commenting out the Updated at section %>
+          <!-- 
+        <p class="card-text timestamp">
+          <strong>Updated at:</strong> <%= chat.updated_at.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }) %> on <%= chat.updated_at.toDateString() %>
+        </p>
+        -->
+
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <form
+              action="/chats/<%= chat._id %>/edit"
+              method="get"
+              class="mr-2"
+            >
+              <button type="submit" class="btn btn-primary">Edit</button>
+            </form>
+            <form
+              action="/chats/<%= chat._id %>?_method=DELETE"
+              method="post"
+              class="delete-form"
+            >
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <% }); %>
+    </div>
+  </body>
+</html>
